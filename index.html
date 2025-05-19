@@ -1,294 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Launch</title>
-  <style>
-    /* General Styles */
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #333;
-      line-height: 1.6;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Launch</title>
 
-    /* Blurred Background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('background.jpg'); /* Replace with your background image */
-      background-size: cover;
-      background-position: center;
-      filter: blur(5px); /* Blur effect */
-      z-index: -1; /* Ensure it stays in the background */
-    }
-
-    /* Header Styles */
-    header {
-      background-color: #E42229;
-      color: #fff;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      z-index: 1; /* Ensure header is above the blurred background */
-    }
-
-    header nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 1rem;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-
-    header nav a:hover {
-      color: #FEBF25;
-    }
-
-    /* Main Content Styles */
-    main {
-      padding: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1; /* Ensure main content is above the blurred background */
-    }
-
-    .section {
-      margin-bottom: 4rem;
-    }
-
-    /* Product Section */
-    .product-section {
-      text-align: center;
-      position: relative;
-    }
-
-    .product-name {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #E42229;
-      margin-bottom: 1rem;
-    }
-
-    .product-image img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .price {
-      font-size: 1.5rem;
-      color: #E42229;
-      margin-top: 0.5rem;
-    }
-
-    /* Product Details Section */
-    .product-details {
-      background-color: #D3D2D2;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .availability-button {
-      background-color: #FEBF25;
-      color: #000;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background-color 0.3s ease;
-    }
-
-    .availability-button:hover {
-      background-color: #e0b400;
-    }
-
-    /* About Page Styles */
-    .about-section {
-      background-color: #ecf0f1;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .about-section h2 {
-      margin-top: 0;
-    }
-
-    /* Order Form Styles */
-    .order-form {
-      display: none;
-      margin-top: 1rem;
-    }
-
-    .order-form input,
-    .order-form button {
-      display: block;
-      width: 100%;
-      margin: 0.5rem 0;
-      padding: 0.75rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .order-form button {
-      background-color: #E42229;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .order-form button:hover {
-      background-color: #c02025;
-    }
-
-    /* Footer Styles */
-    footer {
-      background-color: #E42229;
-      color: #fff;
-      text-align: center;
-      padding: 1rem 0;
-      margin-top: 2rem;
-      position: relative;
-      z-index: 1; /* Ensure footer is above the blurred background */
-    }
-
-    footer a {
-      color: #FEBF25;
-      text-decoration: none;
-      margin: 0 0.5rem;
-      transition: color 0.3s ease;
-    }
-
-    footer a:hover {
-      color: #e0b400;
-    }
-  </style>
+    <!-- Load EmailJS SDK -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
+    ></script>
+   <script>
+    (function () {
+      emailjs.init("x-KtgWES51f4LDRvq"); // Replace with your public key
+    })();
+  </script>
 </head>
-<body>
-  <!-- Header -->
-  <header>
-    <h1><img src="logo.png" alt="Logo" width="125" height="auto"></h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#order">Order</a>
-    </nav>
-  </header>
 
-  <!-- Main Content -->
-  <main>
-    <!-- Product Section -->
-    <div class="section product-section">
-      <h2 class="product-name">'Habala' Muesli</h2>
-      <div class="product-image">
-        <img src="product.jpg" alt="Product Image" width="300" height="300">
-        <p class="price">Rs.750/=</p>
-      </div>
-    </div>
-
-    <!-- Product Details Section -->
-    <div class="section product-details">
-      <p>This section contain details about the product. Add information about its features, benefits, and why customers should choose it.</p>
-      <button class="availability-button" onclick="handleOrder()">Order Now</button>
-      <p id="availability-status" style="color: red; font-weight: bold;">Out of Stock</p>
-    </div>
-
-    <!-- Order Form -->
-    <div class="order-form" id="order-form">
-      <h3>Pre-Order Form</h3>
-      <form id="pre-order-form" onsubmit="submitForm(event)">
-        <input type="text" id="name" placeholder="Your Name" required>
-        <input type="tel" id="contact" placeholder="Contact Number" required>
-        <input type="number" id="quantity" placeholder="Quantity" required>
-        <button type="submit">Submit</button>
-      </form>
-      <p id="form-message" style="display: none; color: green; font-weight: bold;">Form submitted successfully! Our team will contact you.</p>
-    </div>
-
-    <!-- About Section -->
-    <div class="section about-section" id="about">
-      <h2>About Our Product</h2>
-      <p>
-        Welcome to a healthier future! Our Habala Pethi Muesli is crafted to energize your day naturally, combining the power of traditional Sri Lankan ingredients with modern nutrition. Here's what makes our muesli special:
-
- 100% Natural & Wholesome Ingredients
-
-Made with Habala Pethi (Rice Flakes), nuts, seeds and dried fruits — all sourced from trusted Sri Lankan farmers.
-
-Packed with Energy & Nutrition
-
-Rich in fiber, protein, and essential minerals, our muesli keeps you full longer, supports digestion, and fuels your active lifestyle — perfect for gym lovers, busy professionals, and health-conscious individuals.
-
-No Preservatives or Artificial Sweeteners 
-
-We care about your health. That's why our muesli uses natural sweetness from dried fruits — solving the problem of sugary, artificial breakfast options.
-
-
-We believe in delivering true value to our customers. Habala Pethi Muesli is the result of thoughtful research and a passion for healthy living. Whether you seek nutrition, taste, or convenience — our product has got you covered!
-      <p>
-        We believe in delivering value to our customers, and this product is the result of years of research and development. 
-        Whether you're looking for efficiency, reliability, or style, our product has got you covered.
-      </p>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 'Habala' Muesli. All rights reserved.</p>
-    <p>
-      <a href="#about">About</a> |
-      <a href="#order">Order</a> |
-      Contact: <a href="mailto:fernandolinuke@gmail.com">fernandolinuke@gmail.com</a>
-    </p>
-  </footer>
-
-  <!-- Inline Scripts -->
-  <script>
-    const isOutOfStock = true; // Set product availability
-
-    function handleOrder() {
-      if (isOutOfStock) {
-        alert("The product is currently out of stock.");
-        document.getElementById('order-form').style.display = 'block';
-      } else {
-        sendOrderEmail();
+    <style>
+      /* General Styles */
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        line-height: 1.6;
       }
-    }
 
-    function submitForm(event) {
-      event.preventDefault(); // Prevent form submission
+      /* Blurred Background */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("background.jpg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(5px);
+        z-index: -1;
+      }
 
-      // Collect form data
-      const name = document.getElementById('name').value;
-      const contact = document.getElementById('contact').value;
-      const quantity = document.getElementById('quantity').value;
+      /* Header Styles */
+      header {
+        background-color: #e42229;
+        color: #fff;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
 
-      // Simulate sending form data via email
-      const subject = encodeURIComponent('Pre-Order Request for My Product');
-      const body = encodeURIComponent(`Name: ${name}\nContact: ${contact}\nQuantity: ${quantity}`);
-      window.location.href = `mailto:fernandolinuke@gmail.com?subject=${subject}&body=${body}`;
+      header nav a {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 1rem;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+      }
 
+      header nav a:hover {
+        color: #febf25;
+      }
+
+      /* Main Content Styles */
+      main {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .section {
+        margin-bottom: 4rem;
+      }
+
+      /* Product Section */
+      .product-section {
+        text-align: center;
+        position: relative;
+      }
+
+      .product-name {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #e42229;
+        margin-bottom: 1rem;
+      }
+
+      .product-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .price {
+        font-size: 1.5rem;
+        color: #e42229;
+        margin-top: 0.5rem;
+      }
+
+      /* Product Details Section */
+      .product-details {
+        background-color: #d3d2d2;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .availability-button {
+        background-color: #febf25;
+        color: #000;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .availability-button:hover {
+        background-color: #e0b400;
+      }
+
+      /* About Page Styles */
+      .about-section {
+        background-color: #ecf0f1;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-section h2 {
+        margin-top: 0;
+      }
+
+      /* Order Form Styles */
+      .order-form {
+        display: none;
+        margin-top: 1rem;
+      }
+
+      .order-form input,
+      .order-form button {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .order-form button {
+        background-color: #e42229;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .order-form button:hover {
+        background-color: #c02025;
+      }
+
+      /* Footer Styles */
+      footer {
+        background-color: #e42229;
+        color: #fff;
+        text-align: center;
+        padding: 1rem 0;
+        margin-top: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      footer a {
+        color: #febf25;
+        text-decoration: none;
+        margin: 0 0.5rem;
+        transition: color 0.3s ease;
+      }
+
+      footer a:hover {
+        color: #e0b400;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1><img src="logo.png" alt="Logo" width="125" height="auto" /></h1>
+      <nav>
+        <a href="#about">About</a>
+        
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Product Section -->
+      <div class="section product-section">
+        <h2 class="product-name">'Habala' Muesli</h2>
+        <div class="product-image">
+          <img src="product.jpg" alt="Product Image" width="300" height="300" />
+          <p class="price">Rs.750/=</p>
+        </div>
+      </div>
+
+      <!-- Product Details Section -->
+      <div class="section product-details">
+        <p>
+          Our 'Habala' Muesli is a delicious and nutritious blend of
+          Habala Pethi (Rice Flakes), nuts, seeds, and dried fruits. It's the
+          perfect breakfast option for those who want to start their day with
+          energy and health. Packed with fiber, protein, and essential
+          nutrients, our muesli is free from preservatives and artificial
+          sweeteners.
+        </p>
+        <button class="availability-button" onclick="handleOrder()">
+          Order Now
+        </button>
+      </div>
+
+      <!-- Order Form -->
+      <div class="order-form" id="order-form">
+        <h3>Order Form</h3>
+        <form id="pre-order-form" onsubmit="submitForm(event)">
+          <input type="text" id="name" placeholder="Your Name" required>
+          <input type="tel" id="contact" placeholder="Contact Number" required>
+          <input type="email" id="email" placeholder="Your Email Address" required>
+          <input type="number" id="quantity" placeholder="Quantity" required>
+          <input type="text" id="delivery-address" placeholder="Delivery Address" required>
+          <button type="submit">Submit</button>
+        </form>
+        <p
+          id="form-message"
+          style="display: none; color: green; font-weight: bold"
+        >
+          Form submitted successfully! Our team will contact you shortly.
+        </p>
+      </div>
+
+      <!-- About Section -->
+      <div class="section about-section" id="about">
+        <h2>About Our Product</h2>
+        <p>
+          Welcome to a healthier future! Our Habala Pethi Muesli is crafted to
+          energize your day naturally, combining the power of traditional Sri
+          Lankan ingredients with modern nutrition. Here's what makes our muesli
+          special:
+
+          <br /><br />
+          <strong>100% Natural & Wholesome Ingredients</strong><br />
+          Made with Habala Pethi (Rice Flakes), nuts, seeds and dried fruits —
+          all sourced from trusted Sri Lankan farmers.
+
+          <br /><br />
+          <strong>Packed with Energy & Nutrition</strong><br />
+          Rich in fiber, protein, and essential minerals, our muesli keeps you
+          full longer, supports digestion, and fuels your active lifestyle —
+          perfect for gym lovers, busy professionals, and health-conscious
+          individuals.
+
+          <br /><br />
+          <strong>No Preservatives or Artificial Sweeteners</strong><br />
+          We care about your health. That's why our muesli uses natural
+          sweetness from dried fruits — solving the problem of sugary,
+          artificial breakfast options.
+
+          <br /><br />
+          We believe in delivering true value to our customers. Habala Pethi
+          Muesli is the result of thoughtful research and a passion for healthy
+          living. Whether you seek nutrition, taste, or convenience — our
+          product has got you covered!
+        </p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 'Habala' Muesli. All rights reserved.</p>
+      <p>
+        <a href="#about">About</a> | Contact:
+        <a href="mailto:fernandolinuke@gmail.com">fernandolinuke@gmail.com</a>
+      </p>
+    </footer>
+
+    <!-- JavaScript + EmailJS Integration -->
+    <!-- JavaScript + EmailJS Integration -->
+<script>
+  // Initialize EmailJS
+  (function () {
+    emailjs.init("x-KtgWES51f4LDRvq"); // Replace with your actual public key
+  })();
+
+  function handleOrder() {
+    document.getElementById("order-form").style.display = "block";
+  }
+
+  function submitForm(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get form values
+    const name = document.getElementById("name").value;
+    const contact = document.getElementById("contact").value;
+    const quantity = document.getElementById("quantity").value;
+    const address = document.getElementById("delivery-address").value;
+    const email = document.getElementById("email").value; // NEW: get email value
+
+    const serviceID = "service_2h1qvaw"; // Your Service ID
+    const adminTemplateID = "template_admin_order"; // Admin template
+    const customerTemplateID = "template_customer_confir"; // Customer confirmation template
+
+    // Send email to admin
+    emailjs.send(serviceID, adminTemplateID, {
+      name,
+      contact,
+      quantity,
+      address,
+      email // Optional: include email in admin email
+    })
+    .then(() => {
       // Show success message
-      document.getElementById('form-message').style.display = 'block';
+      document.getElementById("form-message").style.display = "block";
 
       // Reset form
-      document.getElementById('pre-order-form').reset();
-    }
-  </script>
-</body>
+      document.getElementById("pre-order-form").reset();
+    })
+    .catch(err => {
+      alert("Failed to send order: " + JSON.stringify(err));
+    });
+
+    // Send confirmation email to customer
+    emailjs.send(serviceID, customerTemplateID, {
+      name,
+      email // Make sure your template uses {{email}}
+    })
+    .catch(err => {
+      console.error("Failed to send confirmation email:", err);
+    });
+  }
+</script>
+  </body>
 </html>
